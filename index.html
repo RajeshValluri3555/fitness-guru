@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Guru</title>
+
+  <!-- CSS Styling for basic layout -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .workout-btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .workout-btn:hover {
+      background-color: #0056b3;
+    }
+    .video-container {
+      margin-top: 20px;
+    }
+    video {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Title -->
+  <h1>Fitness Guru</h1>
+  <p>Select a workout day below:</p>
+
+  <!-- Workout Day Buttons -->
+  <a class="workout-btn" href="?day=1">Day 1: Full Body</a>
+  <a class="workout-btn" href="?day=2">Day 2: Upper Body</a>
+  <a class="workout-btn" href="?day=3">Day 3: Core & Abs</a>
+  <a class="workout-btn" href="?day=4">Day 4: Lower Body</a>
+
+  <!-- Section to display the video based on selected day -->
+  <div class="video-container" id="videoSection"></div>
+
+  <!-- JavaScript for handling day selection and showing video -->
+  <script>
+    // Define video files for each workout day
+    const videos = {
+      1: { title: "Day 1: Full Body", file: "day1.mp4" },
+      2: { title: "Day 2: Upper Body", file: "day2.mp4" },
+      3: { title: "Day 3: Core & Abs", file: "day3.mp4" },
+      4: { title: "Day 4: Lower Body", file: "day4.mp4" },
+    };
+
+    // Get day from the URL query string (e.g., ?day=1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const day = urlParams.get("day");
+
+    // If the day exists in the videos object, show the video
+    if (videos[day]) {
+      const videoData = videos[day];
+      document.getElementById("videoSection").innerHTML = `
+        <h2>${videoData.title}</h2>
+        <video controls>
+          <source src="videos/${videoData.file}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      `;
+    }
+  </script>
+
+</body>
+</html>
